@@ -1,3 +1,7 @@
+#### Sandusky Bay Data: Statistics and Figures
+# Manuscript: Nitrogen cycling in Sandusky Bay, Lake Erie: oscillations between strong and weak export and implications for harmful algal blooms
+# Written by K. Salk (krsalkgu@uwaterloo.ca)
+
 Nutrients=read.csv("Nutrients.csv")
 Nutrients=read.csv("Nutrients2016.csv")
 Nutrients=read.csv("Nutrients1516.csv")

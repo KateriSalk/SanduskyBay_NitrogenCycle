@@ -1,5 +1,5 @@
 #### Sandusky Bay Data: Statistics and Figures
-# Manuscript: The nitrogen pendulum in Sandusky Bay, Lake Erie: Oscillations between strong and weak export and implications for harmful algal blooms
+# Manuscript: Nitrogen cycling in Sandusky Bay, Lake Erie: oscillations between strong and weak export and implications for harmful algal blooms
 # Written by K. Salk (krsalkgu@uwaterloo.ca)
 
 
@@ -149,34 +149,34 @@ Denitregression=lm(Rate[Process=="Denit"]~DIN[Process=="Denit"])
 summary(Denitregression)
 # Coefficients:
 #   Estimate Std. Error t value Pr(>|t|)
-# (Intercept)             0.088069   0.079145   1.113    0.382
-# DIN[Process == "Denit"] 0.003481   0.001381   2.521    0.128
+# (Intercept)              11.7424    10.5496   1.113    0.382
+# DIN[Process == "Denit"]   0.4642     0.1841   2.522    0.128
 # 
-# Residual standard error: 0.1063 on 2 degrees of freedom
-# Multiple R-squared:  0.7606,	Adjusted R-squared:  0.6409 
-# F-statistic: 6.354 on 1 and 2 DF,  p-value: 0.1279
+# Residual standard error: 14.17 on 2 degrees of freedom
+# Multiple R-squared:  0.7607,	Adjusted R-squared:  0.6411 
+# F-statistic: 6.359 on 1 and 2 DF,  p-value: 0.1278
 
 Anammoxregression=lm(Rate[Process=="Anammox"]~DIN[Process=="Anammox"])
 summary(Anammoxregression)
 # Coefficients:
 #   Estimate Std. Error t value Pr(>|t|)
-# (Intercept)               0.0120914  0.0211494   0.572    0.625
-# DIN[Process == "Anammox"] 0.0002508  0.0003691   0.680    0.567
+# (Intercept)                 1.6119     2.8197   0.572    0.625
+# DIN[Process == "Anammox"]   0.0334     0.0492   0.679    0.567
 # 
-# Residual standard error: 0.02841 on 2 degrees of freedom
-# Multiple R-squared:  0.1876,	Adjusted R-squared:  -0.2185 
-# F-statistic: 0.462 on 1 and 2 DF,  p-value: 0.5668
+# Residual standard error: 3.787 on 2 degrees of freedom
+# Multiple R-squared:  0.1872,	Adjusted R-squared:  -0.2191 
+# F-statistic: 0.4607 on 1 and 2 DF,  p-value: 0.5673
 
 N2Oregression=lm(Rate[Process=="N2O"]~DIN[Process=="N2O"])
 summary(N2Oregression)
 # Coefficients:
 #   Estimate Std. Error t value Pr(>|t|)
-# (Intercept)           -0.0005792  0.0037076  -0.156    0.890
-# DIN[Process == "N2O"]  0.0001525  0.0000647   2.357    0.142
+# (Intercept)           -0.078708   0.496007  -0.159    0.888
+# DIN[Process == "N2O"]  0.020342   0.008655   2.350    0.143
 # 
-# Residual standard error: 0.00498 on 2 degrees of freedom
-# Multiple R-squared:  0.7353,	Adjusted R-squared:  0.603 
-# F-statistic: 5.557 on 1 and 2 DF,  p-value: 0.1425
+# Residual standard error: 0.6662 on 2 degrees of freedom
+# Multiple R-squared:  0.7342,	Adjusted R-squared:  0.6012 
+# F-statistic: 5.523 on 1 and 2 DF,  p-value: 0.1432
 
 library(ggplot2)
 mytheme4 <- theme_bw(base_size=10, base_family="") + 
@@ -193,29 +193,27 @@ mytheme4 <- theme_bw(base_size=10, base_family="") +
 #assimilatory processes: rate vs. DIN conc.
 ggplot(NcyclingvsDIN.assim, aes(x=DIN, y=Rate, shape=Process)) + 
   geom_pointrange(aes(ymin = Rate-Rate.SD, ymax = Rate+Rate.SD), position = position_dodge(width = 1)) +
-  geom_point(size=3, fill="gray", position = position_dodge(width = 1)) + 
-  mytheme4 + 
+  geom_point(size=3, fill="darkgray", position = position_dodge(width = 1)) + mytheme4 + 
   scale_shape_manual(values=c(19,22,23), labels=expression("N fixation", "NH"[4]*""^"+"*" uptake", "NO"[3]*""^"-"*" uptake")) + 
-  ylab(expression("Rate ("*mu*"mol N L"^"-1"*" d"^"-1"*")")) + 
+  ylab(expression("Rate ("*mu*"mol N L"^"-1"*" h"^"-1"*")")) + 
   xlab(expression("DIN ("*mu*"M)")) +
-  geom_abline(intercept=7.4924, slope=0.1224, color="black") + #Nfix
-  geom_abline(intercept=0.459677, slope= 0.010483, color="gray") + #NH4 
-  geom_abline(intercept= -0.93563, slope=0.36106, color="gray") +  #NO3
-  annotate("text", x = 80, y = 33, label = paste("R^2 == 0.75"), parse=T, size=3) + #NO3
-  annotate("text", x = 80, y = 20, label = paste("R^2 == 0.04"), parse=T, size=3) + #Nfix
-  annotate("text", x = 80, y = 5, label = paste("R^2 == 0.12"), parse=T, size=3) #NH4  
+  geom_abline(intercept= 0.573723, slope= 0.007384, color="black") + #Nfix
+  geom_abline(intercept=0.0314920, slope=  0.0006826, color="gray40") + #NH4 
+  geom_abline(intercept= -0.056744, slope= 0.023982, color="gray40") +  #NO3
+  annotate("text", x = 80, y = 2.2, label = paste("R^2 == 0.74"), parse=T, size=3) + #NO3
+  annotate("text", x = 80, y = 1.3, label = paste("R^2 == 0.00"), parse=T, size=3) + #Nfix
+  annotate("text", x = 80, y = 0.2, label = paste("R^2 == 0.11"), parse=T, size=3) #NH4  
 
 #dissimilatory processes: rate vs. DIN conc.
 ggplot(NcyclingvsDIN.dissim, aes(x=DIN, y=Rate, shape=Process)) + 
   geom_pointrange(aes(ymin = Rate-Rate.SD, ymax = Rate+Rate.SD),  position = position_dodge(width = 1)) +
-  geom_point(size=3, fill="gray", position = position_dodge(width = 1)) + 
-  mytheme4 + 
+  geom_point(size=3, fill="darkgray", position = position_dodge(width = 1)) + mytheme4 + 
   scale_shape_manual(values=c(21,22,23), labels=expression("Anammox", "Denitrification", "N"[2]*"O prod.")) + 
-  ylab(expression("Rate ("*mu*"mol N L"^"-1"*" d"^"-1"*")")) + 
+  ylab(expression("Rate ("*mu*"mol N m"^"-2"*" h"^"-1"*")")) + 
   xlab(expression("DIN ("*mu*"M)")) +
-  geom_abline(intercept= 0.0120914, slope=0.003481, color="gray") +  #Denitrification
-  geom_abline(intercept= 0.0120914, slope=0.0002508, color="gray") +  #Anammox
-  geom_abline(intercept= -0.0005792, slope=0.0001525, color="gray") + #N2O
-  annotate("text", x = 80, y = 0.4, label = paste("D: R^2 == 0.64"), parse=T, size=2.75) + #Denitrification
-  annotate("text", x = 82, y = 0.1, label = paste("A: R^2 == -0.22"), parse=T, size=2.75) + #Anammox
-  annotate("text", x = 80, y = -0.04, label = paste("N[2]*O: R^2 == 0.60"), parse=T, size=2.75) #N2O
+  geom_abline(intercept= 11.7424, slope= 0.4642, color="gray40") +  #Denitrification
+  geom_abline(intercept= 1.6119, slope= 0.0334, color="gray40") +  #Anammox
+  geom_abline(intercept= -0.078708, slope= 0.020342, color="gray40") + #N2O
+  annotate("text", x = 80, y = 60, label = paste("D: R^2 == 0.64"), parse=T, size=2.75) + #Denitrification
+  annotate("text", x = 82, y = 10, label = paste("A: R^2 == 0.00"), parse=T, size=2.75) + #Anammox
+  annotate("text", x = 80, y = -5, label = paste("N[2]*O: R^2 == 0.60"), parse=T, size=2.75) #N2O
